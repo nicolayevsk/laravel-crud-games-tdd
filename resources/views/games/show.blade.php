@@ -4,7 +4,6 @@
     <h1>{{ $game->title }}</h1>
 
     <p><strong>Description:</strong> {{ $game->description }}</p>
-    <p><strong>Price:</strong> ${{ $game->price }}</p>
 
     <a href="{{ route('games.edit', $game->id) }}" class="btn btn-warning">Edit</a>
 

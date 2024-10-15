@@ -30,7 +30,6 @@ class GameRoutesTest extends TestCase
         $gameData = [
             'title' => 'Test Game',
             'description' => 'Test Description',
-            'price' => 29.99,
         ];
 
         $response = $this->post('/games', $gameData); // Faz uma requisição POST para armazenar um novo jogo
@@ -53,7 +52,6 @@ class GameRoutesTest extends TestCase
         $updatedData = [
             'title' => 'Updated Title',
             'description' => 'Updated Description',
-            'price' => 19.99,
         ];
 
         $response = $this->put("/games/{$game->id}", $updatedData); // Faz uma requisição PUT para atualizar o jogo

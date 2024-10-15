@@ -33,7 +33,6 @@ class GameViewTest extends TestCase // Define a classe de teste para as views de
         $game = Game::factory()->create([ // Cria um jogo usando a factory
             'title' => 'Test Game',
             'description' => 'This is a test game.',
-            'price' => 59.99,
         ]);
 
         $response = $this->get(route('games.show', $game->id)); // Faz uma requisição GET para a rota de exibição do jogo
@@ -50,7 +49,6 @@ class GameViewTest extends TestCase // Define a classe de teste para as views de
         $game = Game::factory()->create([ // Cria um jogo usando a factory
             'title' => 'Edit Test Game',
             'description' => 'This is an edit test game.',
-            'price' => 49.99,
         ]);
 
         $response = $this->get(route('games.edit', $game->id)); // Faz uma requisição GET para a rota de edição do jogo

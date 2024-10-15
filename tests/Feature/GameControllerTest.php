@@ -16,7 +16,6 @@ class GameControllerTest extends TestCase
         $gameData = [
             'title' => 'New Game',
             'description' => 'Game Description',
-            'price' => 39.99,
         ];
 
         $response = $this->post('/games', $gameData); // Faz uma requisição POST para criar um novo jogo
@@ -32,7 +31,6 @@ class GameControllerTest extends TestCase
         $updatedData = [
             'title' => 'Updated Game',
             'description' => 'Updated Description',
-            'price' => 49.99,
         ];
 
         $response = $this->put("/games/{$game->id}", $updatedData); // Faz uma requisição PUT para atualizar o jogo

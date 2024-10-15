@@ -67,7 +67,7 @@ As factories são usadas para gerar dados fictícios de jogos. Isso é útil par
 
 ### Migrations
 
-As migrations são responsáveis por definir a estrutura do banco de dados. No projeto, a migration para a tabela `games` especifica os campos (como `title`, `description` e `price`) e suas características.
+As migrations são responsáveis por definir a estrutura do banco de dados. No projeto, a migration para a tabela `games` especifica os campos (como `title` e `description`)
 
 ## Rodando o Servidor Local
 

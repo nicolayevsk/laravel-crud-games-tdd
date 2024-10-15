@@ -10,7 +10,7 @@ class MigrationTest extends TestCase
     public function it_has_correct_database_schema()
     {
         $this->assertTrue(
-            \Schema::hasColumns('games', ['id', 'title', 'description', 'price'])
+            \Schema::hasColumns('games', ['id', 'title', 'description'])
         );
     }
 }

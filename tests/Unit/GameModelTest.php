@@ -11,6 +11,6 @@ class GameModelTest extends TestCase
     public function it_has_fillable_properties()
     {
         $game = new Game(); // Cria uma nova instância do modelo Game
-        $this->assertEquals(['title', 'description', 'price'], $game->getFillable()); // Verifica se as propriedades preenchíveis estão corretas
+        $this->assertEquals(['title', 'description'], $game->getFillable()); // Verifica se as propriedades preenchíveis estão corretas
     }
 }

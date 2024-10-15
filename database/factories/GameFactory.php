@@ -14,7 +14,6 @@ class GameFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'description' => $this->faker->paragraph(),
-            'price' => $this->faker->randomFloat(2, 10, 100), // preço entre 10 e 100
         ];
     }
 }

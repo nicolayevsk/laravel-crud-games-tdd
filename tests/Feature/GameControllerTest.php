@@ -19,15 +19,15 @@ class GameControllerTest extends TestCase
             'price' => 39.99,
         ];
 
-        $response = $this->post('/games', $gameData);
-        $response->assertRedirect('/games');
-        $this->assertDatabaseHas('games', ['title' => 'New Game']);
+        $response = $this->post('/games', $gameData); // Faz uma requisição POST para criar um novo jogo
+        $response->assertRedirect('/games'); // Verifica se redireciona para a lista de jogos
+        $this->assertDatabaseHas('games', ['title' => 'New Game']); // Confirma se o jogo foi adicionado ao banco de dados
     }
 
     /** @test */
     public function it_can_edit_a_game()
     {
-        $game = Game::factory()->create();
+        $game = Game::factory()->create(); // Cria um jogo usando a factory
 
         $updatedData = [
             'title' => 'Updated Game',
@@ -35,18 +35,18 @@ class GameControllerTest extends TestCase
             'price' => 49.99,
         ];
 
-        $response = $this->put("/games/{$game->id}", $updatedData);
-        $response->assertRedirect('/games');
-        $this->assertDatabaseHas('games', ['title' => 'Updated Game']);
+        $response = $this->put("/games/{$game->id}", $updatedData); // Faz uma requisição PUT para atualizar o jogo
+        $response->assertRedirect('/games'); // Verifica se redireciona para a lista de jogos
+        $this->assertDatabaseHas('games', ['title' => 'Updated Game']); // Confirma se o jogo foi atualizado no banco de dados
     }
 
     /** @test */
     public function it_can_delete_a_game()
     {
-        $game = Game::factory()->create();
+        $game = Game::factory()->create(); // Cria um jogo usando a factory
 
-        $response = $this->delete("/games/{$game->id}");
-        $response->assertRedirect('/games');
-        $this->assertDatabaseMissing('games', ['id' => $game->id]);
+        $response = $this->delete("/games/{$game->id}"); // Faz uma requisição DELETE para remover o jogo
+        $response->assertRedirect('/games'); // Verifica se redireciona para a lista de jogos
+        $this->assertDatabaseMissing('games', ['id' => $game->id]); // Confirma que o jogo foi removido do banco de dados
     }
 }

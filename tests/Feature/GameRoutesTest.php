@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Game;
+use Faker\Factory as Faker;
 
 class GameRoutesTest extends TestCase
 {
@@ -27,14 +28,20 @@ class GameRoutesTest extends TestCase
     /** @test */
     public function it_can_store_a_new_game()
     {
+        $faker = Faker::create(); // Cria uma instância do Faker
+
         $gameData = [
-            'title' => 'Test Game',
-            'description' => 'Test Description',
+            'title' => $faker->sentence(),
+            'description' => $faker->paragraph(),
+            'price' => $faker->randomFloat(2, 1, 100), // Gera um preço entre 1 e 100 com duas casas decimais
+            'release_date' => $faker->date(), // Gera uma data aleatória
+            'is_windows' => $faker->boolean(), // Gera um valor booleano aleatório
+            'is_mac' => $faker->boolean(), // Gera um valor booleano aleatório
         ];
 
         $response = $this->post('/games', $gameData); // Faz uma requisição POST para armazenar um novo jogo
         $response->assertRedirect('/games'); // Verifica se redireciona para a lista de jogos
-        $this->assertDatabaseHas('games', ['title' => 'Test Game']); // Confirma se o jogo foi adicionado ao banco de dados
+        $this->assertDatabaseHas('games', ['title' => $gameData['title']]); // Confirma se o jogo foi adicionado ao banco de dados
     }
 
     /** @test */
@@ -48,15 +55,21 @@ class GameRoutesTest extends TestCase
     /** @test */
     public function it_can_update_a_game()
     {
+        $faker = Faker::create(); // Cria uma instância do Faker
         $game = Game::factory()->create(); // Cria um jogo usando a factory
+
         $updatedData = [
-            'title' => 'Updated Title',
-            'description' => 'Updated Description',
+            'title' => $faker->sentence(),
+            'description' => $faker->paragraph(),
+            'price' => $faker->randomFloat(2, 1, 100), // Gera um preço entre 1 e 100 com duas casas decimais
+            'release_date' => $faker->date(), // Gera uma data aleatória
+            'is_windows' => $faker->boolean(), // Gera um valor booleano aleatório
+            'is_mac' => $faker->boolean(), // Gera um valor booleano aleatório
         ];
 
         $response = $this->put("/games/{$game->id}", $updatedData); // Faz uma requisição PUT para atualizar o jogo
         $response->assertRedirect('/games'); // Verifica se redireciona para a lista de jogos
-        $this->assertDatabaseHas('games', ['title' => 'Updated Title']); // Confirma se o jogo foi atualizado no banco de dados
+        $this->assertDatabaseHas('games', ['title' => $updatedData['title']]); // Confirma se o jogo foi atualizado no banco de dados
     }
 
     /** @test */

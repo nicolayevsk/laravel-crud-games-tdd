@@ -1,16 +1,21 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
-use PHPUnit\Framework\TestCase;
-use App\Models\Game;
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Schema;
 
 class GameModelTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
-    public function it_has_fillable_properties()
+    public function it_has_correct_database_schema()
     {
-        $game = new Game(); // Cria uma nova instância do modelo Game
-        $this->assertEquals(['title', 'description'], $game->getFillable()); // Verifica se as propriedades preenchíveis estão corretas
+        // Verifica se a tabela 'games' possui as colunas esperadas
+        $this->assertTrue(
+            Schema::hasColumns('games', ['id', 'title', 'description', 'price', 'release_date', 'is_windows', 'is_mac'])
+        );
     }
 }

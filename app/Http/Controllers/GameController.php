@@ -20,7 +20,17 @@ class GameController extends Controller
 
     public function store(Request $request)
     {
-        Game::create($request->all());
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'release_date' => 'required|date',
+            'is_windows' => 'boolean',
+            'is_mac' => 'boolean',
+        ]);
+    
+        Game::create($validated);
+    
         return redirect()->route('games.index');
     }
 
@@ -36,7 +46,17 @@ class GameController extends Controller
 
     public function update(Request $request, Game $game)
     {
-        $game->update($request->all());
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'release_date' => 'required|date',
+            'is_windows' => 'boolean',
+            'is_mac' => 'boolean',
+        ]);
+    
+        $game->update($validated);
+    
         return redirect()->route('games.index');
     }
 

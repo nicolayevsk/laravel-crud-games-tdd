@@ -17,6 +17,10 @@ class CreateGamesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
+            $table->decimal('price', 8, 2);
+            $table->date('release_date');
+            $table->boolean('is_windows')->default(false);
+            $table->boolean('is_mac')->default(false);
             $table->timestamps();
         });
     }

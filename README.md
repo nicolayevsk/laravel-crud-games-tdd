@@ -9,7 +9,43 @@ Este é um projeto de CRUD (Create, Read, Update, Delete) de jogos desenvolvido 
 - MySQL ou PostgreSQL
 - Laravel
 
-## Configuração do Projeto
+---
+
+## Configuração
+
+### Instalação de dependências
+
+```
+- composer install
+```
+
+### .env
+
+```
+- cp .env.example .env
+```
+
+### Key
+
+```
+- php artisan key:generate
+```
+
+### Migrations
+
+```
+- php artisan migrate
+```
+
+### Localhost
+
+```
+- php artisan serve
+```
+
+---
+
+## Criação
 
 ### 1. Criar um Novo Projeto Laravel
 
@@ -35,7 +71,7 @@ Para instalar o PHPUnit como dependência de desenvolvimento, use o comando:
 composer require --dev phpunit/phpunit
 ```
 
-### 4. Rodar as migrations
+### 4. Executar as migrations
 
 Para executar as migrations, use o seguinte comando:
 
@@ -43,7 +79,7 @@ Para executar as migrations, use o seguinte comando:
 php artisan migrate
 ```
 
-### 5. Rodar os Testes
+### 5. Executar os Testes
 
 Para executar os testes do PHPUnit, use o seguinte comando:
 

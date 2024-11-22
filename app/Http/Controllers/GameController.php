@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
 use Illuminate\Http\Request;
+use App\Repositories\GameRepository;
 
 class GameController extends Controller
 {
+    protected $gameRepository;
+
+    public function __construct(GameRepository $gameRepository)
+    {
+        $this->gameRepository = $gameRepository;
+    }
+
     public function index()
     {
-        $games = Game::all();
+        $games = $this->gameRepository->getAll();
         return view('games.index', compact('games'));
     }
 
@@ -28,23 +35,25 @@ class GameController extends Controller
             'is_windows' => 'boolean',
             'is_mac' => 'boolean',
         ]);
-    
-        Game::create($validated);
-    
+
+        $this->gameRepository->create($validated);
+
         return redirect()->route('games.index');
     }
 
-    public function show(Game $game)
+    public function show($id)
     {
+        $game = $this->gameRepository->findById($id);
         return view('games.show', compact('game'));
     }
 
-    public function edit(Game $game)
+    public function edit($id)
     {
+        $game = $this->gameRepository->findById($id);
         return view('games.edit', compact('game'));
     }
 
-    public function update(Request $request, Game $game)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -54,15 +63,18 @@ class GameController extends Controller
             'is_windows' => 'boolean',
             'is_mac' => 'boolean',
         ]);
-    
-        $game->update($validated);
-    
+
+        $game = $this->gameRepository->findById($id);
+        $this->gameRepository->update($game, $validated);
+
         return redirect()->route('games.index');
     }
 
-    public function destroy(Game $game)
+    public function destroy($id)
     {
-        $game->delete();
+        $game = $this->gameRepository->findById($id);
+        $this->gameRepository->delete($game);
+
         return redirect()->route('games.index');
     }
 }
